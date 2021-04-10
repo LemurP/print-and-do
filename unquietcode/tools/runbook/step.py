@@ -1,10 +1,12 @@
 from dataclasses import dataclass
+from collections.abc import Callable
 
 
 @dataclass(frozen=True)
 class Step:
     name: str
     description: str
+    method: Callable = None
     display_name: str = None
     skippable: bool = False
     repeatable: bool = False

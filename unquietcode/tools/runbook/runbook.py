@@ -178,22 +178,17 @@ class Runbook:
         
         print()
         
-        # pause for some seconds to give time to read
-        pause_time = 0.01 * (len(step.description) / 1.0 + len(step.description))
-        pause_time = max(pause_time, 1.10)
-        pause_time = min(pause_time, 5.95)
-        
-        # wait before prompting
-        sleep(pause_time)
-        
         # response loop
         repeat = True
+        first_time = True
         
         while repeat is True:
             repeat = False
+            if first_time:
+                step.method()
             
             # ask for input
-            print("\tDid you do the thing?")
+            print("\tDid you do the thing? [y]es/[n]o")
             sentiment, response, plain_response = self._wait_for_response()
 
             if sentiment is True:
@@ -261,11 +256,6 @@ class Runbook:
             if len(function_signature.parameters) == 0:
                 method = getattr(type(self), method_name)
             
-            step_description = method()
-
-            if step_description is not None:
-                step_description = str(step_description)
-                step_description = textwrap.dedent(step_description).strip()
             
             # use docstring if empty
             elif method.__doc__ is not None:
@@ -302,6 +292,7 @@ class Runbook:
                 repeatable=repeatable,
                 skippable=skippable,
                 critical=critical,
+                method=method,
             ))
         
         return steps

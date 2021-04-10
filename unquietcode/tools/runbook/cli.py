@@ -11,7 +11,6 @@ def main(filename):
     
     # setup a signal handler for better output
     def signal_handler(sig, frame):
-        sleep(0.15)
         print('\n')
         sys.exit(0)
 

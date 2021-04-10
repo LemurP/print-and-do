@@ -2,3 +2,5 @@
 *.log
 dist/*
 build/*
+print-and-do/**
+*.egg-info*

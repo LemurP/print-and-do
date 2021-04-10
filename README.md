@@ -1,5 +1,10 @@
-# runbook.py (v0.2)
-`pip3 install runbook`
+# print-and-do
+
+Based on [runbook.py](https://github.com/UnquietCode/runbook.py) by UnquietCode.
+
+Main changes: 
+* Methods are not invoked before getting to the specific step
+* * Enables each step to perform operations at the correct time 
 
 Inspired by [this blog post](https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation)
 by Dan Slimmon.
@@ -9,6 +14,23 @@ doesn't begin with an underscore is read in as a step to be completed, in order.
 The step name will be built from the method name, and the description is taken
 either from the method's own docstring or from any data returned from invoking
 the method.
+
+# Installation
+
+In print-and-do directory
+```
+pip install .
+```
+
+
+# Example 
+In example/my-first-pad.py you will find a simple example.
+
+Run it with 
+
+```
+python3 example/my-first-pad.py
+```
 
 ```python
 from runbook import Runbook
@@ -63,4 +85,7 @@ When reusing the same log file, already completed steps will be skipped. Any new
 and not already in the log will be processed as normal, with results appended to the end of the file.
 
 ### License
-Licensed under the Apache Software License 2.0 (ASL 2.0).
+
+print-and-do (LemurP): Licensed under the MIT License
+
+runbook.py (UnquietCode): Licensed under the Apache Software License 2.0 (ASL 2.0).
