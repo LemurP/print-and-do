@@ -43,10 +43,8 @@ the various options available.
             return True
         
         all_methods = inspect.getmembers(self, lambda _:(inspect.ismethod(_) or inspect.isfunction(_)) and not inspect.isbuiltin(_))
-        print([_[0] for _ in all_methods])
         all_methods = sorted(all_methods, key=key_filter)
         filtered_methods = [_ for _ in filter(is_not_private_main_or_run,all_methods)]
-        print([_[0] for _ in filtered_methods])
         return filtered_methods
     def run(self):
         
