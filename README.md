@@ -84,6 +84,15 @@ python3 my_runbook.py output.log
 When reusing the same log file, already completed steps will be skipped. Any new steps found in the `Runbook`
 and not already in the log will be processed as normal, with results appended to the end of the file.
 
+
+## Standalone version
+
+A super-simple do nothing script is included in example/standalone.
+This script has no dependencies to the project, so it can be copied over and run without any installation.
+
+Using the standalone version is preferred to get a feel for what a do nothing script can accomplish, or when you don't want to install a whole package or download the entire repository to do something.
+
+
 ### License
 
 print-and-do (LemurP): Licensed under the MIT License
