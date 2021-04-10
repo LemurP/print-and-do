@@ -33,48 +33,57 @@ python3 example/my-first-pad.py
 ```
 
 ```python
-from runbook import Runbook
+from unquietcode.tools.runbook import Runbook
 
 
-class CustomRunbook(Runbook):
-   
+class ExamplePrintAndDo(Runbook):
+    """
+    This pad is a basic example that exercises
+    the various options available.
+    """
+
     def first_step(self):
         """
         Do ABC now.
         """
-    
-    def second_step():
+
+    def second_step(self):
         """
-        Do EFG then wait 1 hour.
+        Find the name of the largest planet in our solar system. Paste it here
         """
+        self.name = input("Enter a name:")
+        self.value = 10
 
-    def third_step():
-        task = "reboot"
-        return f"perform a {task}"
-    
-    @staticmethod
-    def last_step():
-        """Everything ok?"""
-```
+    def third_step(self):
+        """
+        Send an email to mike.
+        """
+        print(f"The value from step 2 is: {self.value}")
+        print(f"The name you entered in step 2 is: {self.name}")
 
-Every `Runbook` object comes with a default main method that you can use to execute the script.
+    def fourth_step(self, skippable=False, critical=True):
+        value = "string"
+        return f"a custom {value}"
 
-```python
+    def last_step(self, name='the end'):
+        pass
+
 if __name__ == '__main__':
-    CustomRunbook.main()
+    ExamplePrintAndDo.main()
 ```
 
-The run-book object can also be instantiated and run directly.
+<!-- Every `Runbook` object comes with a default main method that you can use to execute the script. -->
 
-```python
+<!-- The run-book object can also be instantiated and run directly. -->
+
+<!-- ```python
 book = CustomRunbook(file_path="path/to/file")
 book.run()
-```
+``` -->
 
-**You should avoid using the step names `run` and `main`**, which are already defined. If you need to override these
-methods to define custom behavior then that is fine.
+**You should avoid using the step names `run` and `main`**, which are already defined, unless you need to override these methods to define custom behavior.
 
-As steps are completed, the results are written out to a log file. You can set a custom log file path by passing
+As steps are completed, the results are written out to a log file (equal to the name of the class). You can set a custom log file path by passing
 an argument to main, as in:
 
 ```
@@ -92,6 +101,11 @@ This script has no dependencies to the project, so it can be copied over and run
 
 Using the standalone version is preferred to get a feel for what a do nothing script can accomplish, or when you don't want to install a whole package or download the entire repository to do something.
 
+Test the script with:
+```
+python example/standalone/standalone-pad.py
+```
+Steps are run in the order the methods are declared in the file.
 
 ### License
 

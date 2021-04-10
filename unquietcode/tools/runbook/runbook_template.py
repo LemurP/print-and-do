@@ -13,14 +13,14 @@ class {name}(Runbook):
     each run of the book.
     \"\"\"
     
-    def First_Step():
+    def First_Step(self):
         \"\"\"
         Describe your first step here. The name of the step is the name
-        of the method, and the description comes from either the method's
-        docstring or the value returned from invoking the method.
+        of the method, and the description comes from the method's
+        docstring.
         \"\"\"
     
-    def the_second_step(repeatable=True, name="Second Step"):
+    def the_second_step(self, repeatable=True, name="Second Step"):
         \"\"\"
         Steps are read in the order they are defined in the file.
         
@@ -32,6 +32,15 @@ class {name}(Runbook):
         * `name` – alternative title for the step
         \"\"\"
 
+    def third_step_with_code_execution(self, name="Third step with some automation"):
+        \"\"\"
+        Steps can execute code to enable gradual automation.
+
+        Do whatever you want in this step, and it will run before prompting the user to continue
+        \"\"\"
+        variable = input(\"For example ask for input: \")
+        print(\"And do something with it\")
+        print(\"You entered:\"+variable)
 
 if __name__ == '__main__':
     {name}.main()

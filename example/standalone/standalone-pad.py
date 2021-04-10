@@ -27,11 +27,6 @@ the various options available.
         print("Add steps by creating a new function in ExamplePrintAndDoStandalone")
         pass
 
-    @classmethod
-    def main(cls):
-        instance = cls()
-        instance.run()
-        
     def __get_steps(self):
         # sort methods by declaration order
         def key_filter(value):
@@ -86,4 +81,4 @@ the various options available.
 
     
 if __name__ == '__main__':
-    ExamplePrintAndDoStandalone.main()
+    ExamplePrintAndDoStandalone().run()

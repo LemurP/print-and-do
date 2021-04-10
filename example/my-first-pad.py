@@ -20,16 +20,12 @@ class ExamplePrintAndDo(Runbook):
         self.name = input("Enter a name:")
         self.value = 10
     
-    def third_step(self):
+    def third_step(self, skippable=False, critical=True):
         """
         Send an email to mike.
         """
         print(f"The value from step 2 is: {self.value}")
         print(f"The name you entered in step 2 is: {self.name}")
-
-    def fourth_step(self, skippable=False, critical=True):
-        value = "string"
-        return f"a custom {value}"
     
     
     def last_step(self, name='the end'):
