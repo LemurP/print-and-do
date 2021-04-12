@@ -1,32 +1,37 @@
-import re
-import os
-import sys
-import select
 import inspect
+import os
+import re
+import select
+import sys
 import textwrap
-from typing import List
-from time import sleep
 from datetime import datetime
+from time import sleep
+from typing import List
 
-from unquietcode.tools.markt import render_markdown
+from rich.console import Console
+from rich import print as rprint
+from rich.markdown import Markdown
 
 from .cli import main as cli
 from .step import Step
 
 
+def render_markdown(text):
+    rendered = Markdown(text)
+    return rendered
 
 def print_markdown(text):
     text = re.sub(r'\r\n', '\n', text)
-    text = render_markdown(text)
-    print(text.strip())
+    md = render_markdown(text)
+    rprint(md)
     # text = re.sub(r'\n\n', '\n', text)
     # print(mdv(md=text, theme='921.2332'))
 
 def bold(text):
-    return render_markdown(f"__{text}__").strip()
+    return f"__{text}__"
 
 def italics(text):
-    return render_markdown(f"_{text}_").strip()
+    return f"_{text}_"
 
 
 class Runbook:
@@ -106,7 +111,7 @@ class Runbook:
             if preamble:
                 print()
             
-            print(f"({italics('reading existing file')}...)")
+            print_markdown(f"({italics('reading existing file')}...)")
             existing_steps = self._read_file(self.file_path)
             resumed = [True]
         else:
@@ -148,7 +153,7 @@ class Runbook:
         print()
         
         def print_title():
-            print(f"{bold(step.preferred_name)}")
+            print_markdown(f"{bold(step.preferred_name)}")
             print(f"{'-'*len(step.preferred_name)}---\n")
         
         # handle existing steps
@@ -156,14 +161,14 @@ class Runbook:
             existing_step = existing_steps_by_name[step.name]
             
             if step.repeatable is not True:
-                print(f"({italics('skipping already completed step')} '{step.preferred_name}')")
+                print_markdown(f"({italics('skipping already completed step')} '{step.preferred_name}')")
                 return
             else:
-                print(f"({italics('repeating existing step')} '{step.preferred_name}')\n\n")
+                print_markdown(f"({italics('repeating existing step')} '{step.preferred_name}')\n\n")
                 print_title()
         
         elif resumed[0] is True:
-            print(f"({italics('resuming from step')} '{step.preferred_name}')\n\n")
+            print_markdown(f"({italics('resuming from step')} '{step.preferred_name}')\n\n")
             print_title()
             resumed[0] = False
         
