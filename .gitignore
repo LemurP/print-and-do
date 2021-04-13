@@ -4,3 +4,5 @@ dist/*
 build/*
 print-and-do/**
 *.egg-info*
+.idea/
+.vscode/
