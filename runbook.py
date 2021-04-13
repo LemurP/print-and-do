@@ -1,7 +1,7 @@
 import click
-from unquietcode.tools.markt import render_markdown
 
 from unquietcode.tools.runbook import create_new_runbook
+from unquietcode.tools.runbook.runbook import print_markdown
 
 
 @click.group('python3 -m runbook')
@@ -18,10 +18,9 @@ def new(title):
     """
     create a new runbook file
     """
-    
+
     filename = create_new_runbook(title)
     print(f"\ncreated new runbook '{filename}'\n")
-
 
 
 @entrypoint.command()
@@ -32,10 +31,8 @@ def show(filename):
     """
     with open(filename) as file_:
         text = file_.read()
-    
-    rendered = render_markdown(text)
-    print(rendered)
-    
+    print_markdown(text)
+
 
 # module entrypoint
 entrypoint(prog_name='python3 -m runbook')

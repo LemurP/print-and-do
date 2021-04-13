@@ -1,6 +1,5 @@
 import sys
 import signal
-from time import sleep
 
 import click
 
