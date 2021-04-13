@@ -3,7 +3,7 @@ import os
 import re
 import textwrap
 from datetime import datetime
-from typing import List
+from typing import List, Tuple
 
 from rich import print as rprint
 from rich.markdown import Markdown

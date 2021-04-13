@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from unquietcode.tools.runbook import Runbook
 
 
