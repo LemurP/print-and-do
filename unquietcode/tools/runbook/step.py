@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 from collections.abc import Callable
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
@@ -11,7 +11,7 @@ class Step:
     skippable: bool = False
     repeatable: bool = False
     critical: bool = False
-    
+
     @property
     def preferred_name(self):
         if self.display_name:
