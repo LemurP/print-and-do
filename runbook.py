@@ -1,7 +1,7 @@
 import click
 
-from unquietcode.tools.runbook import create_new_runbook
-from unquietcode.tools.runbook.runbook import print_markdown
+from src import create_new_runbook
+from src import print_markdown
 
 
 @click.group('python3 -m runbook')

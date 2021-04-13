@@ -1,3 +1,6 @@
+from glob import glob
+from os.path import splitext, basename
+
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -5,14 +8,27 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="print-and-do",
-    version="0.1",
+    version="0.0.0",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=setuptools.find_namespace_packages(exclude=['test']),
+    url='https://github.com/lemurp/print-and-do',
+    packages=setuptools.find_packages('src'),
+    package_dir={'': 'src'},
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     install_requires=[
         'click >= 7.0',
         'rich >= 10',
     ],
+    extras_require={
+        'dev': [
+            'click >= 7.0',
+            'colorama==0.4.4',
+            'commonmark==0.9.1',
+            'Pygments==2.8.1',
+            'rich==10.1.0',
+            'typing-extensions==3.7.4.3'
+        ]
+    },
     license='OSI Approved :: Apache Software License',
     classifiers=[
         "Programming Language :: Python :: 3",

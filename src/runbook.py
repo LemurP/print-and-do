@@ -5,7 +5,7 @@ import textwrap
 from datetime import datetime
 from typing import List, Tuple
 
-from rich import print as rprint
+from rich import print as richprint
 from rich.markdown import Markdown
 
 from .cli import main as cli
@@ -20,9 +20,7 @@ def render_markdown(text):
 def print_markdown(text):
     text = re.sub(r'\r\n', '\n', text)
     md = render_markdown(text)
-    rprint(md)
-    # text = re.sub(r'\n\n', '\n', text)
-    # print(mdv(md=text, theme='921.2332'))
+    richprint(md)
 
 
 def bold(text):

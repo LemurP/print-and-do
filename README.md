@@ -33,7 +33,7 @@ python3 example/my-first-pad.py
 ```
 
 ```python
-from unquietcode.tools.runbook import Runbook
+from src import Runbook
 
 
 class ExamplePrintAndDo(Runbook):
