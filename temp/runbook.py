@@ -1,7 +1,7 @@
 import click
 
-from src.print_and_do import create_new_runbook
-from src import print_markdown
+from pado.runbook import print_markdown
+from pado.runbook_template import create_new_runbook
 
 
 @click.group('python3 -m runbook')
