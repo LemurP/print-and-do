@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from src import Runbook
+from pado.runbook import Runbook
 
 
 class ExamplePrintAndDo(Runbook):

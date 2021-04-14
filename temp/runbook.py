@@ -1,6 +1,6 @@
 import click
 
-from src import create_new_runbook
+from src.print_and_do import create_new_runbook
 from src import print_markdown
 
 
