@@ -100,12 +100,11 @@ class Runbook:
 
         # check for existing steps
         if os.path.isfile(self.file_path):
-            print()
-
+            to_print = "\n"
             if preamble:
-                print()
+                to_print = to_print + "\n"
 
-            print_markdown(f"({italics('reading existing file')}...)")
+            print_markdown(f"({to_print}{italics('reading existing file')}...)")
             existing_steps = self._read_file(self.file_path)
             resumed = [True]
         else:

@@ -6,3 +6,4 @@ print-and-do/**
 *.egg-info*
 .idea/
 .vscode/
+pado-venv/

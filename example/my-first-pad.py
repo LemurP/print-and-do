@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 from pado.runbook import Runbook
 
 
@@ -31,5 +32,5 @@ class ExamplePrintAndDo(Runbook):
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ExamplePrintAndDo.main()
