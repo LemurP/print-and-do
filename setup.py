@@ -29,6 +29,11 @@ setuptools.setup(
             'typing-extensions==3.7.4.3'
         ]
     },
+    entry_points={
+        'console_scripts': [
+            'pado = pado.cli:main',
+        ]
+    },
     license='OSI Approved :: Apache Software License',
     classifiers=[
         "Programming Language :: Python :: 3",

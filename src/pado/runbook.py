@@ -8,7 +8,7 @@ from typing import List, Tuple
 from rich import print as richprint
 from rich.markdown import Markdown
 
-from .cli import main as cli
+from .cli_helper import main as cli_helper
 from .step import Step
 
 
@@ -63,7 +63,7 @@ class Runbook:
 
     @classmethod
     def main(cls):
-        file_name = cli(standalone_mode=False)
+        file_name, start_from_scratch = cli_helper(standalone_mode=False)
 
         if not file_name:
             pretty_class_name = cls._make_pretty_name(cls.__name__)
@@ -74,9 +74,9 @@ class Runbook:
         file_path = f"{os.getcwd()}/{file_name}"
 
         instance = cls(file_path=file_path)
-        instance.run()
+        instance.run(retry=start_from_scratch)
 
-    def run(self):
+    def run(self, retry=False):
 
         # title
         pretty_class_name = self._make_pretty_name(type(self).__name__)
@@ -99,12 +99,12 @@ class Runbook:
             print_markdown(preamble)
 
         # check for existing steps
-        if os.path.isfile(self.file_path):
+        if not retry and os.path.isfile(self.file_path):
             to_print = "\n"
             if preamble:
                 to_print = to_print + "\n"
-
-            print_markdown(f"({to_print}{italics('reading existing file')}...)")
+            print(f"{to_print}", end="")
+            print_markdown(f"({italics('reading existing file')}...)")
             existing_steps = self._read_file(self.file_path)
             resumed = [True]
         else:
