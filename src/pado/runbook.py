@@ -63,7 +63,7 @@ class Runbook:
 
     @classmethod
     def main(cls):
-        file_name, start_from_scratch = cli_helper(standalone_mode=False)
+        file_name = cli_helper(standalone_mode=False)
 
         if not file_name:
             pretty_class_name = cls._make_pretty_name(cls.__name__)
@@ -184,7 +184,7 @@ class Runbook:
                 step.method()
 
             # ask for input
-            print("\tDid you do the thing? [y]es/[n]o")
+            print("\tDid you do the thing? [y]es/no")
             sentiment, response, plain_response = self._wait_for_response()
 
             if sentiment is True:
@@ -218,7 +218,7 @@ class Runbook:
             plain_response = input("\t~> ").strip()
             response = plain_response.lower()
 
-            if self._matches_any(response, ["yes+", "y", "yep", "yu+rp", "yeah+", "yar+", 'yessir']):
+            if self._matches_any(response, ["", "yes+", "y", "yep", "yu+rp", "yeah+", "yar+", 'yessir']):
                 return True, response, plain_response
             elif self._matches_any(response, ["no+", "n", "nope", "nay", "neurp"]):
                 return False, response, plain_response
@@ -384,8 +384,12 @@ class Runbook:
             # write generic response line
             now = datetime.now()
 
+            if result:
+                result = f"`{result}`"
+            else:
+                result = "by pressing Enter"
             file.write(
-                f"responded `{result}` "
+                f"responded {result} "
                 f"at {now.hour}:{now.strftime('%M:%S')} "
                 f"on {now.strftime('%d/%m/%Y')}\n"
             )

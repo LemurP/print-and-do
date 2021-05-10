@@ -1,7 +1,8 @@
 import re
 
 TEMPLATE = """
-from unquietcode.tools.runbook import Runbook
+#!/usr/bin/env python
+from pado.runbook import Runbook
 
     
 class {name}(Runbook):
