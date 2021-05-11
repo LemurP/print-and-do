@@ -5,9 +5,8 @@ import click
 
 
 @click.command()
-@click.option('--retry', default=False, help='Retry a pado from start.')
 @click.argument('filename', type=click.STRING, required=False)
-def main(retry, filename):
+def main(filename):
     # setup a signal handler for better output on CTRL-C
     def signal_handler(sig, frame):
         print('\n')

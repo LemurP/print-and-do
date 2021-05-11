@@ -4,16 +4,16 @@ Based on [runbook.py](https://github.com/UnquietCode/runbook.py) by UnquietCode.
 
 Main changes: 
 * Methods are not invoked before getting to the specific step
-  * Enables each step to perform operations at the correct time 
+  * Enables each step to perform operations at the correct time
+ * Command-line interface for running PADos from start
+ * Standalone version without any requirements
 
 Inspired by [this blog post](https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation)
 by Dan Slimmon.
 
 Define your own run-book in a class extending from `Runbook`. Every method that
 doesn't begin with an underscore is read in as a step to be completed, in order.
-The step name will be built from the method name, and the description is taken
-either from the method's own docstring or from any data returned from invoking
-the method.
+The step name will be built from the method name, and the description is taken from the method's own docstring.
 
 # Installation
 
@@ -33,7 +33,7 @@ python3 example/my-first-pad.py
 ```
 
 ```python
-from src import Runbook
+from pado.runbook import Runbook
 
 
 class ExamplePrintAndDo(Runbook):

@@ -74,7 +74,7 @@ class Runbook:
         file_path = f"{os.getcwd()}/{file_name}"
 
         instance = cls(file_path=file_path)
-        instance.run(retry=start_from_scratch)
+        instance.run()
 
     def run(self, retry=False):
 
