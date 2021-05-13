@@ -15,6 +15,20 @@ Define your own run-book in a class extending from `Runbook`. Every method that
 doesn't begin with an underscore is read in as a step to be completed, in order.
 The step name will be built from the method name, and the description is taken from the method's own docstring.
 
+# Similar projects
+[Runbook by Braintree](https://github.com/braintree/runbook) - Create automated runbooks for tasks. Powerful tool, written in Ruby.
+
+>Though Runbook can solve a myriad of problems, it is best used for removing the need for repeated, rote developer operations. Runbook allows developers to execute processes at a higher level than that of individual command-line commands. Additionally, Runbook provides features to simply and safely execute operations in mission-critical environments.
+
+Print-And-Do exists as a simpler version of a Runbook, but somewhat more powerful than a do-nothing script. For users more familiar with Python this can be a simpler place to start.
+
+# Use cases
+You have a process that requires manual steps, but you know some or all of the steps can be automated. Automating everything at once is a daunting task.
+
+By structuring the manual process as a Print-And-Do script you can perform the process as a step-by-step process where each step can be automated separately.
+
+Pasting an existing process description into a PADo is often a good first iteration. Then you run the script to see the description. Each time you performs the process, you should refine the PADo and hopefully be able to automate some part. When the entire PADo is automated, it can be turned into a fully automated script by removing the reference to Runbook and being run in a pipeline or as a cron-job.
+
 # Installation
 
 In print-and-do directory
@@ -29,7 +43,7 @@ In example/my-first-pad.py you will find a simple example.
 Run it with 
 
 ```
-python3 example/my-first-pad.py
+pado run example/my-first-pad.py
 ```
 
 ```python
