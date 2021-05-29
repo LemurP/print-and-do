@@ -1,3 +1,4 @@
+import logging
 import subprocess
 
 import click
@@ -8,22 +9,21 @@ from pado.runbook_template import create_new_runbook
 
 
 @click.group('pado')
-def main():
-    """
-    runbook-py module command line helper
-    """
+@click.option('--log', type=click.Choice(["DEBUG", "INFO", "WARNING"], case_sensitive=False), default="WARNING")
+def main(log):
+    logging.getLogger().setLevel(log)
     pass
 
 
-@main.command()
+@main.command(short_help="create a new print-and-do file")
 @click.argument('title', type=click.STRING)
 def new(title):
     """
-    create a new runbook file named TITLE
+    create a new print-and-do file named TITLE
     """
 
     filename = create_new_runbook(title)
-    print(f"\ncreated new runbook '{filename}'\n")
+    print(f"\ncreated new pado '{filename}'\n")
 
 
 @main.command()
@@ -47,12 +47,16 @@ def run(filename):
     subprocess.call(['python', filename])
 
 
-@main.command()
+@main.command(short_help="list print-and-do files")
 @click.argument('directory', type=click.STRING, default="")
+@click.option('--certain', is_flag=True,
+              prompt='This is in BETA, it will load all modules in the given directory to check. Are you certain you want to do that?')
 # @click.option('--retry', is_flag=True, default=False, help='Retry a pado from start.')
-def list(directory):
+def list(directory, certain):
     """
     list print-and-do files in DIRECTORY
     """
-    for pado in get_all_pados_in_directory(directory):
-        print(pado)
+    if certain:
+
+        for pado in get_all_pados_in_directory(directory):
+            print(pado)

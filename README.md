@@ -5,8 +5,9 @@ Based on [runbook.py](https://github.com/UnquietCode/runbook.py) by UnquietCode.
 Main changes: 
 * Methods are not invoked before getting to the specific step
   * Enables each step to perform operations at the correct time
- * Command-line interface for running PADos from start
- * Standalone version without any requirements
+* Command-line interface for running PADos from start
+* Standalone version without any requirements
+* List all PADos in a directory (beta)
 
 Inspired by [this blog post](https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation)
 by Dan Slimmon.
