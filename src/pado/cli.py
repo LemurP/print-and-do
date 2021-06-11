@@ -1,10 +1,17 @@
+import importlib
+import inspect
 import logging
+import os
 import subprocess
+from _importlib_modulespec import Loader
+from importlib import util
+from types import ModuleType
+from typing import Optional
 
 import click
 
 from pado.directory_traversal import get_all_pados_in_directory
-from pado.runbook import print_markdown
+from pado.runbook import print_markdown, Runbook
 from pado.runbook_template import create_new_runbook
 
 
@@ -27,7 +34,7 @@ def new(title):
 
 
 @main.command()
-@click.argument('filename', type=click.STRING)
+@click.argument('filename', type=click.Path(exists=True))
 def show(filename):
     """
     render the contents of a log file in the terminal
@@ -38,13 +45,37 @@ def show(filename):
 
 
 @main.command()
-@click.argument('filename', type=click.STRING)
-# @click.option('--retry', is_flag=True, default=False, help='Retry a pado from start.')
-def run(filename):
+@click.argument('filename', type=click.Path(exists=True))
+@click.option('--retry', is_flag=True, default=False, help='Retry a pado from start.')
+@click.option('--raw', is_flag=True, default=False,
+              help='Run the pado file with "python FILENAME" in the shell instead of as a class')
+def run(filename, retry, raw):
     """
     run a print-and-do file
     """
-    subprocess.call(['python', filename])
+    if raw:
+        subprocess.call(['python', filename])
+    else:
+        run_print_and_do_file_by_instantiating_class(filename)
+
+
+def run_print_and_do_file_by_instantiating_class(filename):
+    file_path = os.path.abspath(filename)
+    logging.debug(
+        f"filename={filename}, file_path={file_path}. imported ModuleSpec = {importlib.util.spec_from_file_location(filename, file_path)}")
+    if (spec := importlib.util.spec_from_file_location(filename, file_path)) is not None:
+        # If you chose to perform the actual import ...
+        module: ModuleType = importlib.util.module_from_spec(spec)
+        logging.info(f"{module!r} has been imported")
+        loader: Optional[Loader] = spec.loader
+        loader.exec_module(module)
+        classes = [cls for _, cls in
+                   inspect.getmembers(module, inspect.isclass)]
+        logging.info(f"Found classes: {classes} in file: {filename}")
+        if Runbook in classes:
+            classes[0](f"{classes[0]._make_pretty_name(classes[0].__name__).lower()}.log").run()
+    else:
+        logging.info(f"can't find the {filename!r} module")
 
 
 @main.command(short_help="list print-and-do files")

@@ -16,12 +16,12 @@ setuptools.setup(
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     install_requires=[
-        'click >= 7.0',
+        'click >= 8.0',
         'rich >= 10',
     ],
     extras_require={
         'dev': [
-            'click >= 7.0',
+            'click >= 8.0',
             'colorama==0.4.4',
             'commonmark==0.9.1',
             'Pygments==2.8.1',

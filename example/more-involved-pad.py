@@ -27,7 +27,7 @@ class ExamplePrintAndDo(Runbook):
 
     def third_step(self, skippable=False, critical=True):
         """
-        Make sure to use a __secure__ algorithm to ensure you
+        Make sure to use a __secure__ algorithm to ensure you are happy with the result
         * Make seven references
 
         # Use markdown to display instructions
