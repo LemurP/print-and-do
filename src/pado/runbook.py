@@ -11,6 +11,8 @@ from rich.markdown import Markdown
 from .cli_helper import main as cli_helper
 from .step import Step
 
+REMINDER_TO_EDIT = "Remember to **edit the pado**, and __improve something__ if you can!"
+
 
 def render_markdown(text):
     rendered = Markdown(text)
@@ -94,6 +96,7 @@ class Runbook:
         # preamble
         preamble = self._preamble()
 
+        print_markdown(f"\n{REMINDER_TO_EDIT}")
         if preamble:
             print()
             print_markdown(preamble)
