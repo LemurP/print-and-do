@@ -7,6 +7,7 @@ Main changes:
   * Enables each step to perform operations at the correct time
 * Command-line interface for running PADos from start
 * Standalone version without any requirements
+* Central storage of which pados have been registered, to enable listing all known pados
 * List all PADos in a directory (beta)
 
 Inspired by [this blog post](https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation)
