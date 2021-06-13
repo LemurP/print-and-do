@@ -18,6 +18,7 @@ setuptools.setup(
     install_requires=[
         'click >= 8.0',
         'rich >= 10',
+        'appdirs >= 1.4.4'
     ],
     extras_require={
         'dev': [
@@ -26,7 +27,8 @@ setuptools.setup(
             'commonmark==0.9.1',
             'Pygments==2.8.1',
             'rich==10.1.0',
-            'typing-extensions==3.7.4.3'
+            'typing-extensions==3.7.4.3',
+            'appdirs >= 1.4.4'
         ]
     },
     entry_points={
