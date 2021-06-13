@@ -103,13 +103,27 @@ def register(filename):
     config = CONFIG_DIR / CONFIG_FILENAME
     if not config.exists():
         logging.debug(f"Config file does not exist: {config}")
-        data = {REGISTERED_PADOS_JSON_FIELD: [str(Path(filename).absolute())]}
+        data = {REGISTERED_PADOS_JSON_FIELD: {str(Path(filename).absolute())}}
+        logging.debug(data)
         with config.open('w') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
+            logging.debug(f"Created config: {config}")
+            json.dump(data, f, ensure_ascii=False, indent=4, default=serialize_sets)
     with config.open('r') as f:
         logging.debug(f"Config file exists: {config}")
         configuration = json.load(f)  # now 'configuration' can safely be imported from this module
         logging.debug(f"config file contains: {configuration}")
+        configuration[REGISTERED_PADOS_JSON_FIELD] = set(configuration[REGISTERED_PADOS_JSON_FIELD])
+        configuration[REGISTERED_PADOS_JSON_FIELD].add(str(Path(filename).absolute()))
+        with config.open('w') as f1:
+            json.dump(configuration, f1, ensure_ascii=False, indent=4, default=serialize_sets)
+        logging.debug(f"After registering {filename}, config file contains: {configuration}")
+
+
+def serialize_sets(obj):
+    if isinstance(obj, set):
+        return list(obj)
+
+    raise TypeError
 
 
 @main.command(short_help="list print-and-do files")
