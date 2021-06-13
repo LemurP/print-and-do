@@ -113,7 +113,7 @@ def register(filename):
 
 
 @main.command(short_help="list print-and-do files")
-@click.argument('directory', type=click.STRING, default="")
+@click.argument('directory', default=".", type=click.Path(exists=True, file_okay=False))
 @click.option('--certain', is_flag=True,
               prompt='This is in BETA, it will load all modules in the given directory to check. Are you certain you want to do that?')
 # @click.option('--retry', is_flag=True, default=False, help='Retry a pado from start.')
