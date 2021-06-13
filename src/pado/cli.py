@@ -117,7 +117,7 @@ def register(filename):
 @click.option('--certain', is_flag=True,
               prompt='This is in BETA, it will load all modules in the given directory to check. Are you certain you want to do that?')
 # @click.option('--retry', is_flag=True, default=False, help='Retry a pado from start.')
-def list(directory, certain):
+def listknown(directory, certain):
     """
     list print-and-do files in DIRECTORY
     """
@@ -151,9 +151,10 @@ def pretty_print_known_pados(known_pados):
 
 
 @main.command(short_help="list known print-and-do files")
-def listknown():
+def listknowndeprecate():
     """
     list known print-and-do files
     """
+    # TODO: This should be merged with list and this command removed
     known_pados = read_known_pados_from_config()
     pretty_print_known_pados(known_pados)
